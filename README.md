@@ -1,6 +1,18 @@
 # Codecool Online Shop
 
-Java SE: Web Project skeleton
+Educational Web Project made in Java. Electronics online shop with Paypal integration
+
+Java
+Maven
+Jetty
+Postgresql
+Thymeleaf
+Bootstrap
+Paypal
+
+# Screenshot
+
+![alt text](ScreenshotShop.png?raw=true)
 
 # Install
 
