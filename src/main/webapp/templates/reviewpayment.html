@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Codecool Shop Order Review</title>
+    <link rel="icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/vendors/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/vendors/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/static/vendors/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="/static/vendors/linericon/style.css">
+    <link rel="stylesheet" href="/static/vendors/owl-carousel/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/static/vendors/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="/static/vendors/nice-select/nice-select.css">
+    <link rel="stylesheet" href="/static/vendors/nouislider/nouislider.min.css">
+
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<header th:insert="navbar.html :: navbar"></header>
+  
+	<!-- ================ start banner area ================= -->	
+	<section class="blog-banner-area" id="category">
+		<div class="container h-100">
+			<div class="blog-banner">
+				<div class="text-center">
+					<h1>Order Confirmation Review</h1>
+					<nav aria-label="breadcrumb" class="banner-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Shop Category</li>
+            </ol>
+          </nav>
+				</div>
+			</div>
+    </div>
+	</section>
+	<!-- ================ end banner area ================= -->
+  
+  <!--================Order Details Area =================-->
+  <section class="order_details section-margin--small">
+    <div class="container">
+      <p class="text-center billing-alert">Please check your order and confirmed.</p>
+      <div class="row mb-5">
+        <div class="col-md-6 col-xl-4 mb-4 mb-xl-0">
+          <div class="confirmation-card">
+            <h3 class="billing-title">Order Info</h3>
+            <table class="order-rable">
+              <tr>
+                <td>Order number</td>
+                <td th:text="${': ' + cartId}"></td>
+              </tr>
+              <tr>
+                <td>Date</td>
+                <td>: Jun 26, 2020</td>
+              </tr>
+              <tr>
+                <td>Total</td>
+                <td th:text="${': ' + transaction.amount.total + ' USD'}"></td>
+              </tr>
+              <tr>
+                <td>Payment method</td>
+                <td>: Paypal</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-4 mb-4 mb-xl-0">
+          <div class="confirmation-card">
+            <h3 class="billing-title">Billing Address</h3>
+            <table class="order-rable">
+              <tr>
+                <td>Street</td>
+                <td th:text="${': '+shippingAddress.line1}"></td>
+              </tr>
+              <tr>
+                <td>City</td>
+                <td th:text="${': '+shippingAddress.city}"></td>
+              </tr>
+              <tr>
+                <td>Postcode</td>
+                <td th:text="${': ' + shippingAddress.postalCode}"></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-4 mb-4 mb-xl-0">
+          <div class="confirmation-card">
+            <h3 class="billing-title">Shipping Address</h3>
+            <table class="order-rable">
+              <tr>
+                <td>Street</td>
+                <td th:text="${': '+shippingAddress.line1}"></td>
+              </tr>
+              <tr>
+                <td>City</td>
+                <td th:text="${': '+shippingAddress.city}"></td>
+              </tr>
+              <tr>
+                <td>Postcode</td>
+                <td th:text="${': ' + shippingAddress.postalCode}"></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="order_details_table">
+        <h2>Order Details</h2>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="element, iterStat: ${cartList}">
+                <td>
+                  <p th:text="${element.getProductName()}"></p>
+                </td>
+                <td>
+                  <h5 th:text="${'x '+element.getQuantity()}"></h5>
+                </td>
+                <td>
+                  <p th:text="${element.getQuantity() * element.getPrice() + 'USD'}"></p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h4>Subtotal</h4>
+                </td>
+                <td>
+                  <h5></h5>
+                </td>
+                <td>
+                  <p th:text="${totalPrice} + ' USD'"></p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h4>Shipping</h4>
+                </td>
+                <td>
+                  <h5></h5>
+                </td>
+                <td>
+                  <p>Free : $0.00</p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h4>Total</h4>
+                </td>
+                <td>
+                  <h5></h5>
+                </td>
+                <td>
+                  <h4 th:text="${totalPrice} + ' USD'"></h4>
+                </td>
+              </tr>
+            <tr>
+                <form action="/execute_payment" method="post">
+                    <input type="hidden" name="paymentId" th:value="${paymentId}" />
+                    <input type="hidden" name="PayerID" th:value="${payerId}" />
+                    <button type="submit">Pay</button>
+                </form>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--================End Order Details Area =================-->
+
+
+<footer th:replace="footer.html :: copy"></footer>
+
+
+<script src="/static/vendors/jquery/jquery-3.2.1.min.js"></script>
+<script src="/static/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="/static/vendors/skrollr.min.js"></script>
+<script src="/static/vendors/owl-carousel/owl.carousel.min.js"></script>
+<script src="/static/vendors/nice-select/jquery.nice-select.min.js"></script>
+<script src="/static/vendors/nouislider/nouislider.min.js"></script>
+<script src="/static/vendors/jquery.ajaxchimp.min.js"></script>
+<script src="/static/vendors/mail-script.js"></script>
+<script src="/static/js/main.js"></script>
+</body>
+</html>

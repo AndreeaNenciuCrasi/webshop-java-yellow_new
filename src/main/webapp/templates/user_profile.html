@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Codecool" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <title>Codecool Shop</title>
+
+    <!-- Bootstrap components -->
+    <!-- Latest compiled and minified Jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <!--Latest compiled and minified Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- End of Bootstrap components -->
+
+    <link rel="stylesheet" type="text/css" href="/static/css/boot_forms.css" />
+</head>
+
+<body>
+
+<nav th:insert="navbar.html :: navbar"></nav>
+
+<div class="container">
+    <div class="signup-form">
+        <form action="/user-profile" method="post">
+            <h2>Edit profile</h2>
+            <div class="form-group">
+                <input type="first_name" class="form-control" name="first_name" th:placeholder="${firstName}">
+            </div>
+            <div class="form-group">
+                <input type="last_name" class="form-control" name="last_name" th:placeholder="${lastName}">
+            </div>
+            <div class="form-group">
+                <input type="username" class="form-control" name="username" th:placeholder="${username}">
+            </div>
+            <div class="form-group">
+                <input type="phone_number" class="form-control" name="phone_number" th:placeholder="${phone_number}">
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" name="email" th:placeholder="${email}">
+            </div>
+            <div class="form-group">
+                <input type="billing_address" class="form-control" name="billing_address" th:placeholder="${billing_address}">
+            </div>
+            <div class="form-group">
+                <input type="shipping_address" class="form-control" name="shipping_address" th:placeholder="${shipping_address}">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success btn-lg btn-block">Save changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div th:replace="footer.html :: copy"></div>
+</body>
+</html>

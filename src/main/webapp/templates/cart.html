@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ro" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Codecool Shop - Cart</title>
+    <link rel="icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/vendors/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/vendors/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/static/vendors/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="/static/vendors/linericon/style.css">
+    <link rel="stylesheet" href="/static/vendors/owl-carousel/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/static/vendors/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="/static/vendors/nice-select/nice-select.css">
+    <link rel="stylesheet" href="/static/vendors/nouislider/nouislider.min.css">
+
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<header th:insert="navbar.html :: navbar"></header>
+
+<!-- ================ start banner area ================= -->
+<section class="blog-banner-area" id="category">
+    <div class="container h-100">
+        <div class="blog-banner">
+            <div class="text-center">
+                <h1>Shopping Cart</h1>
+                <nav aria-label="breadcrumb" class="banner-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Shopping Cart</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ================ end banner area ================= -->
+
+
+<!--================Cart Area =================-->
+<section class="cart_area">
+    <div class="container">
+        <div class="cart_inner">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Product</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr th:each="entry: ${cartListInMem}">
+                        <td>
+                            <div class="media">
+                                <div class="d-flex">
+                                    <img th:attr="src='/static/img/product_' + ${entry.getKey().getId()} + '.jpg'"
+                                         alt="">
+                                </div>
+                                <div class="media-body">
+                                    <p th:text="${entry.getKey().getName()}"></p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <h5 th:text="${entry.getKey().getPrice()}"></h5>
+                        </td>
+                        <td>
+                            <div class="product_count">
+                                <form action="/cart" method="post">
+                                    <input type="text" name="changeQuantity" maxlength="12"
+                                           th:value="${entry.getValue()}" title="Quantity:"
+                                           class="input-text qty">
+                                    <input type="hidden" onkeydown="return false" th:value="${entry.getKey().getId()}"
+                                           name="itemId">
+                                    <button type="submit" class="increase items-count"><i class="lnr lnr-chevron-up"></i></button>
+                                    <button type="submit" class="reduced items-count"><i class="lnr lnr-chevron-down"></i></button>
+                                </form>
+                            </div>
+                        </td>
+                        <td>
+                            <h5 th:text="${entry.getValue() * entry.getKey().getPriceDouble()} + ' USD'"></h5>
+                        </td>
+                    </tr>
+
+                    <tr th:each="element, iterStat: ${cartList}">
+                        <td>
+                            <div class="media">
+                                <div class="d-flex">
+                                    <img th:attr="src='/static/img/' + ${element.getProductImage()}" alt="">
+                                </div>
+                                <div class="media-body">
+                                    <p th:text="${element.getProductName()}"></p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <h5  th:text="${element.getPrice() + ' USD'}"></h5>
+                        </td>
+                        <td>
+                            <div class="product_count">
+                                <form action="/cart" method="post">
+                                    <input type="text" name="changeQuantity" maxlength="12"
+                                           th:value="${element.getQuantity()}" title="Quantity:"
+                                           class="input-text qty">
+                                    <input type="hidden" onkeydown="return false" th:value="${element.getQuantity()}"
+                                           name="itemId">
+                                    <button type="submit" class="increase items-count"><i class="lnr lnr-chevron-up"></i></button>
+                                    <button type="submit" class="reduced items-count"><i class="lnr lnr-chevron-down"></i></button>
+                                </form>
+                            </div>
+                        </td>
+                        <td>
+                            <h5 th:text="${element.getQuantity() * element.getPrice() + 'USD'}"></h5>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            <h5>Subtotal</h5>
+                        </td>
+                        <td>
+                            <h5 th:text="${totalPrice} +' USD'"></h5>
+                        </td>
+                    </tr>
+                    <tr class="shipping_area">
+                        <td class="d-none d-md-block">
+
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            <h5>Shipping Free</h5>
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                    <tr class="out_button_area">
+                        <td class="d-none-l">
+
+                        </td>
+                        <td class="">
+
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            <div class="checkout_btn_inner d-flex align-items-center">
+                                <a class="gray_btn" href="/shop">Continue Shopping</a>
+                                <a class="primary-btn ml-2" href="/checkout">Proceed to checkout</a>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Cart Area =================-->
+
+
+<footer th:replace="footer.html :: copy"></footer>
+
+
+<script src="/static/vendors/jquery/jquery-3.2.1.min.js"></script>
+<script src="/static/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="/static/vendors/skrollr.min.js"></script>
+<script src="/static/vendors/owl-carousel/owl.carousel.min.js"></script>
+<script src="/static/vendors/nice-select/jquery.nice-select.min.js"></script>
+<script src="/static/vendors/jquery.ajaxchimp.min.js"></script>
+<script src="/static/vendors/mail-script.js"></script>
+<script src="/static/js/main.js"></script>
+</body>
+</html>

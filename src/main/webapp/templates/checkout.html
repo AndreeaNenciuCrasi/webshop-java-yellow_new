@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Codecool Shop - Checkout</title>
+    <link rel="icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/vendors/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/vendors/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/static/vendors/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="/static/vendors/linericon/style.css">
+    <link rel="stylesheet" href="/static/vendors/owl-carousel/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/static/vendors/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="/static/vendors/nice-select/nice-select.css">
+    <link rel="stylesheet" href="/static/vendors/nouislider/nouislider.min.css">
+
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<header th:insert="navbar.html :: navbar"></header>
+
+<!-- ================ start banner area ================= -->
+<section class="blog-banner-area" id="category">
+    <div class="container h-100">
+        <div class="blog-banner">
+            <div class="text-center">
+                <h1>Product Checkout</h1>
+                <nav aria-label="breadcrumb" class="banner-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ================ end banner area ================= -->
+
+
+<!--================Checkout Area =================-->
+<section class="checkout_area section-margin--small">
+    <div class="container">
+        <div class="billing_details">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h3>Billing Details (Optional)</h3>
+                        <div class="col-md-6 form-group p_star">
+                            <input type="text" class="form-control" id="number" name="phone" placeholder="Phone number">
+                            <span class="placeholder" data-placeholder="Phone number"></span>
+                        </div>
+                        <div class="col-md-12 form-group p_star">
+                            <input type="text" class="form-control" id="add1" name="add1" placeholder="Address line 01">
+                            <span class="placeholder" data-placeholder="Address line 01"></span>
+                        </div>
+                        <div class="col-md-12 form-group p_star">
+                            <input type="text" class="form-control" id="add2" name="add2" placeholder="Address line 02">
+                            <span class="placeholder" data-placeholder="Address line 02"></span>
+                        </div>
+                    <h3>Shipping Details (Optional)</h3>
+                    <div class="col-md-6 form-group p_star">
+                        <input type="text" class="form-control" name="phone2" placeholder="Phone number">
+                        <span class="placeholder" data-placeholder="Phone number"></span>
+                    </div>
+                    <div class="col-md-12 form-group p_star">
+                        <input type="text" class="form-control" name="add2.1" placeholder="Address line 01">
+                        <span class="placeholder" data-placeholder="Address line 01"></span>
+                    </div>
+                    <div class="col-md-12 form-group p_star">
+                        <input type="text" class="form-control" name="add2.2" placeholder="Address line 02">
+                        <span class="placeholder" data-placeholder="Address line 02"></span>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+
+                    <form action="/authorize_payment" method="post">
+                        <div class="order_box">
+                            <h2>Your Order</h2>
+                            <ul class="list">
+                                <li><a href="#"><h4>Product <span>Total</span></h4></a></li>
+                            </ul>
+
+                            <ul class="list">
+                                <li th:each="element, iterStat: ${cartList}">
+                                    <a href="#" >
+                                    <span class="first" th:text="${element.getProductName()}"></span>
+                                    <span class="middle" th:text="${'x ' + element.getQuantity()}"></span>
+                                    <span class="last" th:text="${element.getQuantity() * element.getPrice() + ' USD'}"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="list">
+                                <li></li>
+                            </ul>
+                            <ul class="list list_2">
+                                <input type="hidden" name="product" th:value="${cartId}" />
+                                <li><a href="#">Subtotal <span th:text="${totalPrice} + ' USD'"></span></a></li>
+                                <input type="hidden" name="subtotal" th:value="${totalPrice}" />
+                                <li><a href="#">Shipping <span>Free</span></a></li>
+                                <li><a href="#">Total <span th:text="${totalPrice} + ' USD'"></span></a></li>
+                                <input type="hidden" name="total" th:value="${totalPrice}" />
+
+                            </ul>
+                            <div class="payment_item active">
+                                <div class="radion_btn">
+                                    <input type="radio" id="f-option6" name="selector" checked>
+                                    <label for="f-option6">Paypal </label>
+                                    <img src="/static/img/card.jpg" alt="">
+                                    <div class="check"></div>
+                                </div>
+                                <p>Pay via PayPal; you can pay with your credit card if you do not have a PayPal
+                                    account.</p>
+                            </div>
+                            <div class="creat_account">
+                                <input type="checkbox" id="f-option4" name="selector" checked>
+                                <label for="f-option4">I have read and accept the </label>
+                                <a href="#">terms & conditions*</a>
+                            </div>
+                            <div class="text-center">
+                               <button class="button button-paypal" type="submit">Proceed to Paypal</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Checkout Area =================-->
+
+
+<footer th:replace="footer.html :: copy"></footer>
+
+
+<script src="/static/vendors/jquery/jquery-3.2.1.min.js"></script>
+<script src="/static/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="/static/vendors/skrollr.min.js"></script>
+<script src="/static/vendors/owl-carousel/owl.carousel.min.js"></script>
+<script src="/static/vendors/nice-select/jquery.nice-select.min.js"></script>
+<script src="/static/vendors/nouislider/nouislider.min.js"></script>
+<script src="/static/vendors/jquery.ajaxchimp.min.js"></script>
+<script src="/static/vendors/mail-script.js"></script>
+<script src="/static/js/main.js"></script>
+</body>
+</html>

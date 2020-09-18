@@ -1,14 +1,75 @@
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <body>
+<footer th:fragment="copy">
+    <div class="footer-area">
+        <div class="container">
+            <div class="row section_gap">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="single-footer-widget tp_widgets">
+                        <h4 class="footer_title large_title">Our Mission</h4>
+                        <p>
+                            Our mission is a world in which all people's basic needs are fulfilled in an environmentally
+                            sustainable way.
+                        </p>
+                        <p>
+                            We are a company that improves the quality of the environment and the communities where we
+                            live and work.
+                        </p>
+                    </div>
+                </div>
+                <div class="offset-lg-1 col-lg-2 col-md-6 col-sm-6">
+                    <div class="single-footer-widget tp_widgets">
+                        <h4 class="footer_title">Quick Links</h4>
+                        <ul class="list">
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/shop">Shop</a></li>
+                            <li><a href="/login">Account</a></li>
+                            <li><a href="/contact">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="offset-lg-1 col-lg-3 col-md-6 col-sm-6">
+                    <div class="single-footer-widget tp_widgets">
+                        <h4 class="footer_title">Contact Us</h4>
+                        <div class="ml-40">
+                            <p class="sm-head">
+                                <span class="fa fa-location-arrow"></span>
+                                Office Address
+                            </p>
+                            <p>Strada Semilunei 4-6, Bucharest 020797</p>
 
-<div th:fragment="copy">
-    <div class="card">
-        <div class="card-body">
-            &copy; 2019 Codecool Budapest
+                            <p class="sm-head">
+                                <span class="fa fa-phone"></span>
+                                Phone Number
+                            </p>
+                            <p>
+                                0723 456 7890
+
+                            </p>
+
+                            <p class="sm-head">
+                                <span class="fa fa-envelope"></span>
+                                Email
+                            </p>
+                            <p>
+                                BucurestiTest@test.com
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row d-flex">
+                <p class="col-lg-12 footer-text text-center">
+                    Copyright &copy; 2020 Codecool Bucharest - Team Yellow </p>
 
+            </div>
+        </div>
+    </div>
+</footer>
 </body>
 </html>

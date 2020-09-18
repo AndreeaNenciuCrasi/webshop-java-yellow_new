@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Codecool Shop - Category</title>
+    <link rel="icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/vendors/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/vendors/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/static/vendors/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="/static/vendors/linericon/style.css">
+    <link rel="stylesheet" href="/static/vendors/owl-carousel/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/static/vendors/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="/static/vendors/nice-select/nice-select.css">
+    <link rel="stylesheet" href="/static/vendors/nouislider/nouislider.min.css">
+
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<header th:insert="navbar.html :: navbar"></header>
+
+<!-- ================ start banner area ================= -->
+<section class="blog-banner-area" id="category">
+    <div class="container h-100">
+        <div class="blog-banner">
+            <div class="text-center">
+                <h1>Shop Category</h1>
+                <nav aria-label="breadcrumb" class="banner-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Shop Category</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ================ end banner area ================= -->
+
+
+<!-- ================ category section start ================= -->
+<section class="section-margin--small mb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-3 col-lg-4 col-md-5">
+                <div class="sidebar-categories">
+                    <div class="head">Categories</div>
+                    <ul class="main-categories">
+                        <li class="common-filter">
+                            <form action="#">
+                                <ul>
+                                    <li class="filter-list"><input class="pixel-radio" type="radio" id="tablets"
+                                                                   name="brand"
+                                                                   onclick="location.href='shop?category=1'"><label
+                                            for="tablets">Tablets</label></li>
+                                    <li class="filter-list"><input class="pixel-radio" type="radio" id="smartwatches"
+                                                                   name="brand"
+                                                                   onclick="location.href='shop?category=2'"><label
+                                            for="smartwatches">Smartwatches</label>
+                                    </li>
+                                </ul>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+                <div class="sidebar-filter">
+                    <div class="top-filter-head">Suppliers Filters</div>
+                    <div class="common-filter">
+                        <div class="head">Brands</div>
+                        <form action="#">
+                            <ul>
+                                <li class="filter-list"><input class="pixel-radio" type="radio" id="amazon" name="brand"
+                                                               onclick="location.href='shop?supplier=1'"><label
+                                        for="amazon">Amazon</label></li>
+                                <li class="filter-list"><input class="pixel-radio" type="radio" id="lenovo"
+                                                               name="brand"
+                                                               onclick="location.href='shop?supplier=2'"><label
+                                        for="lenovo">Lenovo</label></li>
+                                <li class="filter-list"><input class="pixel-radio" type="radio" id="ebay"
+                                                               name="brand"
+                                                               onclick="location.href='shop?supplier=3'"><label
+                                        for="ebay">Ebay</label></li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-9 col-lg-8 col-md-7">
+                <section class="lattest-product-area pb-40 category-list">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
+                            <div class="card text-center card-product">
+                                <div class="card-product__img">
+                                    <img class="card-img" src="http://placehold.it/400x250/000/fff"
+                                         th:attr="src='/static/img/' + ${prod.image}" alt="">
+                                    <ul class="card-product__imgOverlay">
+                                        <form action="/cart" method="post">
+                                            <input type="hidden" name="addToCart" th:value="${prod.getId()}">
+                                            <li>
+                                                <button type="submit" value="Add to cart"><i class="ti-shopping-cart"></i></button>
+                                            </li>
+                                        </form>
+                                    </ul>
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="card-product__title" th:text="${prod.name}"></h4>
+                                    <p class="card-product__price" th:text="${prod.getPrice()}"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ================ category section end ================= -->
+
+<footer th:replace="footer.html :: copy"></footer>
+
+
+<script src="/static/vendors/jquery/jquery-3.2.1.min.js"></script>
+<script src="/static/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="/static/vendors/skrollr.min.js"></script>
+<script src="/static/vendors/owl-carousel/owl.carousel.min.js"></script>
+<script src="/static/vendors/nice-select/jquery.nice-select.min.js"></script>
+<script src="/static/vendors/nouislider/nouislider.min.js"></script>
+<script src="/static/vendors/jquery.ajaxchimp.min.js"></script>
+<script src="/static/vendors/mail-script.js"></script>
+<script src="/static/js/main.js"></script>
+
+</body>
+</html>
